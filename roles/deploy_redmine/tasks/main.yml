@@ -1,0 +1,32 @@
+- name: Создание .env файла
+  template:
+    src: env.j2
+    dest: "{{ ansible_env.HOME }}/redmine.env"
+
+- name: Создание .env файла
+  template:
+    src: env.j2
+    dest: /home/the9gramm/redmine.env
+
+- name: Создание .env файла
+  become: false
+  template:
+    src: env.j2
+    dest: /home/the9gramm/redmine.env
+
+- name: Создание docker-compose файла
+  template:
+    src: docker-compose.yml.j2
+    dest: /home/the9gramm/docker-compose.yml
+
+- name: Запуск Redmine через Docker Compose
+  become: true
+  args:
+    chdir: /home/the9gramm
+  command: docker compose -f docker-compose.yml up -d
+
+- name: Создание docker-compose файла
+  become: false
+  template:
+    src: docker-compose.yml.j2
+    dest: /home/the9gramm/docker-compose.yml

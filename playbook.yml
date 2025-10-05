@@ -1,6 +1,14 @@
 - hosts: all
   become: true
-
   roles:
-    - geerlingguy.pip
-    - geerlingguy.docker
+    - deploy_redmine
+  tags:
+    - deploy
+
+
+- hosts: all
+  become: true
+  roles:
+    - deploy_redmine
+  tags:
+    - deploy
