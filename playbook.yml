@@ -1,14 +1,15 @@
 - hosts: all
   become: true
-  roles:
-    - deploy_redmine
-  tags:
-    - deploy
+  tags: deploy
 
+  tasks:
+    - name: Copy docker-compose.yml
+      ansible.builtin.template:
+        src: templates/docker-compose.yml.j2
+        dest: /home/{{ ansible_user }}/docker-compose.yml
+        mode: '0644'
 
-- hosts: all
-  become: true
-  roles:
-    - deploy_redmine
-  tags:
-    - deploy
+    - name: Ensure docker-compose is up
+      ansible.builtin.shell: docker compose up -d
+      args:
+        chdir: /home/{{ ansible_user }}

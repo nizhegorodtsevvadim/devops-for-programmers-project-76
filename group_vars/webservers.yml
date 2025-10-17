@@ -1,0 +1,5 @@
+redmine_port: 3000
+
+redmine_db_mysql: 89.169.174.117
+redmine_db_database: redmine
+redmine_db_username: redmine
